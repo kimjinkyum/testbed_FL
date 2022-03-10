@@ -2,3 +2,4 @@
 **/src/logs/
 **/venv/
 **/.idea/
+**/src/__pycache__/
