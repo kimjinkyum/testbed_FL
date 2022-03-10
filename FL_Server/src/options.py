@@ -28,7 +28,7 @@ def args_parser():
     # other arguments
     parser.add_argument('--dataset', type=str, default='cifar', help="name \
                         of dataset")
-    parser.add_argument('--data_size' , type=int, default=100, help="size of dataset")
+    parser.add_argument('--data_size', type=int, default=100, help="size of dataset")
     parser.add_argument('--num_classes', type=int, default=10, help="number \
                         of classes")
     parser.add_argument('--gpu', default=1, help="To use cuda, set \
@@ -44,10 +44,8 @@ def args_parser():
                         help='rounds of early stopping')
     parser.add_argument('--verbose', type=int, default=1, help='verbose')
     parser.add_argument('--seed', type=int, default=1, help='random seed')
-    parser.add_argument('--dcm', type=int, default=1,
-                        help="Whether run dcm process")
-    parser.add_argument('--data_load', type=int, default=0, help="Whether dataset load or resample (0 : resample 1: "
-                                                                 "reload")
+
+    parser.add_argument('--opt_name', type=list, default=[], help="optimal value")
 
     args = parser.parse_args()
     return vars(args)
