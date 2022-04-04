@@ -21,6 +21,7 @@ if __name__ == "__main__":
     stream_handler.setFormatter(formatter)
     logger.addHandler(stream_handler)
     logger.info("Listing pods with their IPs")
+
     """
     # 쿠버네티스 API
     config.load_kube_config()
@@ -29,7 +30,7 @@ if __name__ == "__main__":
     # 쿠버네티스에서 마스터와 연동되어 있는 모든 Pod 가져오기
     ret = v1.list_pod_for_all_namespaces(watch=False)
     ip_lists = []
-    application_name = "torch-example"
+    application_name = "testbed1"
 
     for i in ret.items:
 
@@ -37,8 +38,9 @@ if __name__ == "__main__":
         if application_name in i.metadata.name:
             ip_lists.append(i.status.pod_ip)
             logger.info("Pod IP {}".format(i.status.pod_ip))
+            
     """
-    ip_lists = ["192.9.200.161"]
+    ip_lists = ["192.9.201.69"]
     logger.info(ip_lists)
 
     ret = None
@@ -62,10 +64,12 @@ if __name__ == "__main__":
 
     # Send metadata & model
     # Jobs -> Wait_finish : 동시다발적으로 url 전송 그 후 기다림
-
+    print(requests.post("http://"+ip_lists[0]+":8585/send_model"))
     for i in range(num_users):
         jobs.append(pool.submit(fl_server.send_training_info, ip_lists[i], i))
+        print("K")
         if wait_finish(jobs) == "Finish":
+            print("ALL")
             jobs = []
             pass
 

@@ -66,6 +66,8 @@ class FL_server:
         send_url = url + "send_info"
         logger.info('Send to client id {}'.format(id))
         res = requests.post(send_url, data=json.dumps(self.args))
+        print("KKKK")
+        print(res.status_code)
         logger.info(res.text + str(id))
         return res.text
 
